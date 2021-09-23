@@ -1,0 +1,70 @@
+---
+title: EN Docker
+author: xNoJustice
+date: '2021-09-23'
+tags: ['cheatsheet', 'english']
+summary: English Docker Cheat Sheet
+---
+
+## Docker Build
+
+**Docker Image Build :**
+`docker build . `
+
+**Docker Give Name to Image Build :**
+`docker build . -t (name) `
+
+## Docker General
+
+**Docker Image List :**
+`docker images `
+
+**Docker Container List :**
+`docker ps `
+
+**Docker Container List All :**
+`docker ps -a `
+
+**Docker Pull Image :**
+`docker pull (image) (Example : docker pull ubuntu)`
+
+**Docker Run Image :**
+`docker run (image) (Example : docker run ubuntu)`
+
+**Docker Ubuntu Bash Access :**
+`docker run -it ubuntu `
+
+**Docker Start/Stop**
+`docker start (image_name) / docker run --name (name) (image) / docker stop (container_name/container_id) `
+
+**Docker Accessing Containers Outside (Setting Port) :**
+`docker run -p Outer_Port:Inner_Port mongo (Example : docker run -p 27017:27017 mongo) `
+
+**Docker Delete Image/Container :**
+`docker rm (image/container_name/container_id) `
+
+**Docker Delete All Containers (Inactive Containers) :**
+`docker rm $(docker container ls -aq) `
+
+**Docker Delete None Images :**
+`docker rmi $(docker images -f “dangling=true” -q) `
+
+**Docker Running an Image in the Background:**
+`docker run -d (image_name) `
+
+**Docker Activating Background Container :**
+`docker attach (container_name/container_id) `
+
+**Docker Access Container Log :**
+`docker container logs (container_name/container_id) `
+
+**Docker Create Volume :**
+`docker run -v Our_Folder:Folder_in_Container mongo (Example : docker run -v /opt/data:/data/db mongo) `
+
+## Docker MySQL
+
+**Docker MySQL Access :**
+`docker exec -it _container_name_ bash `
+
+**MySQL Bash Login :**
+`mysql -uroot -ppassword`

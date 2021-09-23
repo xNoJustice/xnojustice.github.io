@@ -1,19 +1,39 @@
 const projectsData = [
   {
-    title: 'A Search Engine',
-    description: `What if you could look up any information in the world? Webpages, images, videos
-    and more. Google has many features to help you find exactly what you're looking
-    for.`,
-    imgSrc: '/static/images/google.png',
-    href: 'https://www.google.com',
+    title: 'ElectronEchidna',
+    description: 'Echidna Puzzle Solver App for Celestial World 2.0 with Electron & React',
+    imgSrc: '/static/images/echidna.gif',
+    sourceCode: 'https://github.com/xNoJustice/electron-react-echidna-app/',
   },
   {
-    title: 'The Time Machine',
-    description: `Imagine being able to travel back in time or to the future. Simple turn the knob
-    to the desired date and press "Go". No more worrying about lost keys or
-    forgotten handphones with this simple yet affordable solution.`,
-    imgSrc: '/static/images/time-machine.jpg',
-    href: '/blog/the-time-machine',
+    title: 'ElectronCw2Clipboard',
+    description: 'Small Tool App for Celestial World 2.0 with Electron & React',
+    imgSrc: '/static/images/cw2.gif',
+    sourceCode: 'https://github.com/xNoJustice/electron-react-cw2-clipboard-app/',
+  },
+  {
+    title: 'React Todo App',
+    description: 'Todo App with React & Material UI',
+    imgSrc: '/static/images/todo.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-todo-app/',
+  },
+  {
+    title: 'React Countdown App',
+    description: 'Countdown App with React',
+    imgSrc: '/static/images/countdown.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-countdown-app/',
+  },
+  {
+    title: 'React Calculator App',
+    description: 'Calculator App with React & Material UI',
+    imgSrc: '/static/images/calculator.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-calculator-app/',
+  },
+  {
+    title: 'React TicTacToe App',
+    description: 'TicTacToe App with React',
+    imgSrc: '/static/images/tictactoe.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-tictactoe-app/',
   },
 ]
 

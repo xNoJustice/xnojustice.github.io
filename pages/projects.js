@@ -12,19 +12,18 @@ export default function Projects() {
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Projects
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Showcase your projects with a hero image (16 x 9)
-          </p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">Things I have built</p>
         </div>
-        <div className="container py-12">
-          <div className="flex flex-wrap -m-4">
+        <div className="container py-6">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             {projectsData.map((d) => (
               <Card
                 key={d.title}
                 title={d.title}
                 description={d.description}
                 imgSrc={d.imgSrc}
-                href={d.href}
+                sourceCode={d.sourceCode}
+                liveLink={d.liveLink}
               />
             ))}
           </div>
