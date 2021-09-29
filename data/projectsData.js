@@ -7,7 +7,7 @@ const projectsData = [
   },
   {
     title: 'Personal Website',
-    description: 'My Personal Website',
+    description: 'My Personal Website with Next JS and Tailwind CSS',
     imgSrc: '/static/images/personal.png',
     sourceCode: 'https://github.com/xNoJustice/xnojustice.github.io/',
   },
