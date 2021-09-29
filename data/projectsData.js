@@ -1,5 +1,17 @@
 const projectsData = [
   {
+    title: 'Tools App',
+    description: 'Tools and Calculators for Celestial World 2.0 with React & Material UI',
+    imgSrc: '/static/images/cw2.png',
+    liveLink: 'https://celestial-world.netlify.app/',
+  },
+  {
+    title: 'Personal Website',
+    description: 'My Personal Website',
+    imgSrc: '/static/images/personal.png',
+    sourceCode: 'https://github.com/xNoJustice/xnojustice.github.io/',
+  },
+  {
     title: 'ElectronEchidna',
     description: 'Echidna Puzzle Solver App for Celestial World 2.0 with Electron & React',
     imgSrc: '/static/images/echidna.gif',
