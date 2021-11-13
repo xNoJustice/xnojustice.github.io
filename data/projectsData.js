@@ -24,6 +24,36 @@ const projectsData = [
     sourceCode: 'https://github.com/xNoJustice/electron-react-cw2-clipboard-app/',
   },
   {
+    title: 'React Corona Tracker App (API NOT WORKING SINCE 2021 MARCH)',
+    description: 'Corona Tracker App with React & Tailwind',
+    imgSrc: '/static/images/corona-tracker.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-corona-tracker-app/',
+  },
+  {
+    title: 'React Quiz App',
+    description: 'Quiz App with React & Tailwind',
+    imgSrc: '/static/images/quiz.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-quiz-app/',
+  },
+  {
+    title: 'React Calculator App 2',
+    description: 'Calculator App with React & Tailwind',
+    imgSrc: '/static/images/calculator2.png',
+    sourceCode: 'https://github.com/xNoJustice/react-calculator2-app/',
+  },
+  {
+    title: 'React TicTacToe App 2',
+    description: 'TicTacToe App 2 with React',
+    imgSrc: '/static/images/tictactoe2.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-tictactoe2-app/',
+  },
+  {
+    title: 'React Countries App',
+    description: 'Countries App with React & Tailwind',
+    imgSrc: '/static/images/countries.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-countries-app/',
+  },
+  {
     title: 'React Todo App',
     description: 'Todo App with React & Material UI',
     imgSrc: '/static/images/todo.gif',
