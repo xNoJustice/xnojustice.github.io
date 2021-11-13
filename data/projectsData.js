@@ -50,7 +50,7 @@ const projectsData = [
   {
     title: 'React Countries App',
     description: 'Countries App with React & Tailwind',
-    imgSrc: '/static/images/countries.gif',
+    imgSrc: '/static/images/countries.png',
     sourceCode: 'https://github.com/xNoJustice/react-countries-app/',
   },
   {
