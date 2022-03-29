@@ -16,16 +16,18 @@ const Card = ({ title, description, imgSrc, sourceCode, liveLink }) => {
   return (
     <div className="flex m-4 mr-2 p-2 pl-1 bg-white dark:bg-gray-800 rounded-lg shadow">
       <div className="flex-none w-32 md:w-60">
-        <Image
-          alt={title}
-          src={imgSrc}
-          className="absolute rounded-lg inset-0 object-cover w-48 h-48"
-          width="100%"
-          height="100%"
-          layout="responsive"
-          objectFit="contain"
-          loading="lazy"
-        />
+        {imgSrc && (
+          <Image
+            alt={title}
+            src={imgSrc}
+            className="absolute rounded-lg inset-0 object-cover w-48 h-48"
+            width="100%"
+            height="100%"
+            layout="responsive"
+            objectFit="contain"
+            loading="lazy"
+          />
+        )}
       </div>
       <div className="flex flex-wrap">
         <h1 className="flex-auto text-xl font-semibold dark:text-gray-50 ml-2 mt-2">{title}</h1>

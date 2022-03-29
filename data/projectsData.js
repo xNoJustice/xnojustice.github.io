@@ -6,10 +6,22 @@ const projectsData = [
     liveLink: 'https://celestial-world.netlify.app/',
   },
   {
+    title: 'Tools App2',
+    description: 'Tools and Calculators for Aeldra 2.0 with React & Material UI',
+    imgSrc: '/static/images/ae2.png',
+    liveLink: 'https://aeldra2.netlify.app/',
+  },
+  {
     title: 'Personal Website',
     description: 'My Personal Website with Next JS and Tailwind CSS',
     imgSrc: '/static/images/personal.png',
     sourceCode: 'https://github.com/xNoJustice/xnojustice.github.io/',
+  },
+  {
+    title: 'ElectronMelixera',
+    description: 'Melixera Puzzle Solver App for Celestial World 2.0 with Electron & React',
+    imgSrc: '/static/images/melixera.gif',
+    sourceCode: 'https://github.com/xNoJustice/electron-react-melixera-app/',
   },
   {
     title: 'ElectronEchidna',
@@ -22,6 +34,35 @@ const projectsData = [
     description: 'Small Tool App for Celestial World 2.0 with Electron & React',
     imgSrc: '/static/images/cw2.gif',
     sourceCode: 'https://github.com/xNoJustice/electron-react-cw2-clipboard-app/',
+  },
+  {
+    title: 'Auto Ban Discord Bot',
+    description: 'The bot ban user after left from your server with Discord.js',
+    sourceCode: 'https://github.com/xNoJustice/discord-auto-ban-bot',
+  },
+  {
+    title: 'React Quiz App 2',
+    description: 'Quiz App 2 with React & Tailwind',
+    imgSrc: '/static/images/quiz2.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-quiz-app2/',
+  },
+  {
+    title: 'React Password Generator App',
+    description: 'Password Generator App with React & Tailwind',
+    imgSrc: '/static/images/password-generator.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-password-generator-app/',
+  },
+  {
+    title: 'React Countdown App 2',
+    description: 'Countdown App with React & Tailwind',
+    imgSrc: '/static/images/countdown2.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-countdown-app2/',
+  },
+  {
+    title: 'React Slider App',
+    description: 'Slider App with React & Tailwind',
+    imgSrc: '/static/images/slider.gif',
+    sourceCode: 'https://github.com/xNoJustice/react-slider-app/',
   },
   {
     title: 'React Corona Tracker App (API NOT WORKING SINCE 2021 MARCH)',
