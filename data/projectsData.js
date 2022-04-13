@@ -18,6 +18,18 @@ const projectsData = [
     sourceCode: 'https://github.com/xNoJustice/xnojustice.github.io/',
   },
   {
+    title: 'ElectronCatchKing',
+    description: 'Catch the King Helper with Electron & React & Tailwind CSS',
+    imgSrc: '/static/images/catchKing.gif',
+    sourceCode: 'https://github.com/xNoJustice/electron-react-catch-king-app/',
+  },
+  {
+    title: 'ElectronOkeyCardGame',
+    description: 'Okey Card Game Helper with React & Electron & Tailwind CSS',
+    imgSrc: '/static/images/okey.gif',
+    sourceCode: 'https://github.com/xNoJustice/electron-react-okey-card-app/',
+  },
+  {
     title: 'ElectronMelixera',
     description: 'Melixera Puzzle Solver App for Celestial World 2.0 with Electron & React',
     imgSrc: '/static/images/melixera.gif',

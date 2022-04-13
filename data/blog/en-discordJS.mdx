@@ -1,0 +1,456 @@
+---
+title: EN Discord JS
+author: xNoJustice
+date: '2022-04-12'
+tags: ['cheatsheet', 'english']
+summary: English Discord JS Cheatsheet
+---
+
+## Discord JS v13
+
+**Starter Template**
+
+```javascript
+const { Client, Intents, Collection } = require('discord.js')
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES],
+  allowedMentions: { parse: ['users', 'roles'], repliedUser: true },
+})
+require('dotenv').config()
+
+client.commands = new Collection()
+
+// add commands folder
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`)
+  commands.push(command.data.toJSON())
+  client.commands.set(command.data.name, command)
+}
+
+client.login(process.env.TOKEN)
+```
+
+**Sample Command Structure**
+
+```javascript
+// ping.js
+module.exports = {
+  name: 'ping',
+  async execute(message) {
+    message.reply({
+      content: 'pong!',
+      allowedMentions: { users: [message.author.id] },
+    })
+  },
+}
+```
+
+**Ready Event**
+
+```javascript
+client.on('ready', (client) => {
+  console.info(
+    `Ready as ${client.user.tag}! ${new Date()} to serve in ${
+      client.channels.cache.size
+    } channels on ${client.guilds.cache.size} servers, for a total of ${
+      client.users.cache.size
+    } users.`
+  )
+
+  client.user.setPresence({
+    activities: [
+      {
+        name: client.guilds.cache.size + ' servers',
+        type: 'COMPETING',
+        url: 'https://github.com/xNoJustice',
+      },
+    ],
+    status: 'available',
+  })
+})
+```
+
+**MessageCreate Event**
+
+```javascript
+client.on('messageCreate', (client, message) => {
+  if (!message.content.startsWith(process.env.PREFIX) || message.author.bot) return
+
+  const args = message.content.slice(process.env.PREFIX.length).trim().split(/ +/)
+  const commandName = args.shift().toLowerCase()
+
+  if (commandName === 'ping') {
+    message.channel.send({ content: 'pong!' })
+  }
+  // Mention the user
+  if (commandName === 'ping') {
+    message.reply({
+      content: 'pong!',
+      allowedMentions: { users: [message.author.id] },
+    })
+  }
+  // If user mentioned
+  if (commandName === 'ping') {
+    let user = message.mentions.users.first()
+    message.channel.send({
+      content: `pong! <@${user.id}>`,
+    })
+  }
+})
+```
+
+**GuildCreate Event**
+
+```javascript
+client.on('guildCreate', (client, guild) => {
+  console.log(`The bot joined to ${guild.name}`)
+})
+```
+
+**GuildDelete Event**
+
+```javascript
+client.on('guildDelete', (client, guild) => {
+  console.log(`The bot left from ${guild.name}`)
+})
+```
+
+**Delete Message after Send**
+
+```javascript
+// Miliseconds: 1 sec = 1000, 1 min = 60 000, 1 hour = 3 600 000, 1 day = 86 400 000
+await channel.send('MESSAGE').then((msg) => setTimeout(() => msg.delete(), Miliseconds))
+```
+
+**Find Emoji by Name**
+
+```javascript
+client.emojis.cache.find((emoji) => emoji.name === 'emoji_name')
+```
+
+**Find Channel by Name**
+
+```javascript
+guild.channels.cache.find((channel) => channel.name === 'channel_name')
+```
+
+**Fetch Messages in Channel**
+
+```javascript
+channel.messages.fetch({ limit: 100 })
+```
+
+**Embed Message**
+
+```javascript
+const { MessageEmbed } = require('discord.js')
+
+// You can send 10 Embeds with one message.
+const embed = new MessageEmbed()
+  .setColor('#0099ff')
+  .setTitle('TITLE') // Max 255 Characters
+  .setURL('URL')
+  .setAuthor({ name: 'AUTHOR', iconURL: 'ICON_URL', url: 'URL' })
+  .setDescription('DESCRIPTION') // 4096 Characters
+  .setThumbnail('THUMBNAIL_URL')
+  .addFields(
+    // Max 25 Fields, Field Title Max 256 Characters, Field Value Max 1024 Characters
+    { name: 'FIELD_TITLE', value: 'FIELD_VALUE' },
+    { name: 'FIELD_TITLE', value: 'FIELD_VALUE' },
+    { name: 'FIELD_TITLE', value: 'FIELD_VALUE', inline: true },
+    { name: 'FIELD_TITLE', value: 'FIELD_VALUE', inline: true }
+  )
+  .addField('INLINE_TITLE', 'INLINE_VALUE', true)
+  .setImage('IMAGE_URL') // Image
+  .setTimestamp() // Timestap
+  .setFooter({ text: 'FOOTER', iconURL: 'ICON_URL' }) // Footer Text Max 2048 Characters
+
+channel.send({ embeds: [embed] })
+```
+
+**Send Welcome Message**
+
+```javascript
+const { MessageEmbed, Permissions } = require('discord.js')
+
+let msg = new MessageEmbed()
+  .setColor('#0099ff')
+  .setTitle('TITLE')
+  .setDescription('**• LINE1\n• LINE2**')
+  .setTimestamp()
+
+let defaultChannel = 0
+
+guild.channels.cache.forEach(async (channel) => {
+  if (defaultChannel === 0 && channel.type === 'GUILD_TEXT') {
+    if (channel.permissionsFor(guild.me).has(Permissions.FLAGS.SEND_MESSAGES)) {
+      defaultChannel = 1
+      await channel
+        .send({ embeds: [msg] })
+        .then(() => {
+          console.log(`The bot send welcome message to ${guild.name}`)
+        })
+        .catch(() => {
+          console.log(`The bot can't send welcome message to ${guild.name}`)
+        })
+    }
+  }
+})
+```
+
+**Ban User**
+
+```javascript
+await member.ban({ reason: 'REASON' })
+```
+
+**Webhook**
+
+```javascript
+const { WebhookClient } = require('discord.js')
+
+const webhook = new WebhookClient({
+  id: process.env.WEBHOOK_ID,
+  token: process.env.WEBHOOK_TOKEN,
+})
+
+if (!message) return
+try {
+  await webhook.send(`**${message}**`)
+} catch (error) {
+  console.error('Error trying to send: ', error)
+}
+```
+
+**Manage Emojis & Send Embedded Message**
+
+```javascript
+const { MessageEmbed, Permissions } = require('discord.js')
+// Prepare Embed
+
+const embedMessage = new MessageEmbed()
+  .setColor('#00FFFF')
+  .setTitle('MESSAGE')
+  .setDescription(`**Click to emoji for delete the message!**`)
+
+// Send Embed
+
+const msg = await message.channel
+  .send({ embeds: [embedMessage] })
+  .catch(() => message.channel.send('Something wrong! Please try again!'))
+
+// Add Reactions
+
+await msg.react('❌')
+
+// Collector Reactions
+
+const filter = (reaction, user) => {
+  return reaction.emoji.name === '❌' && !user.bot
+}
+
+const collector = msg.createReactionCollector({ filter, time: 1200000 }) // 1200000 = 20 Minutes
+
+collector.on('collect', async (reaction, user) => {
+  if (reaction.emoji.name === '❌') {
+    if (msg.deletable) msg.delete().catch(console.error)
+  }
+})
+
+// Delete User Message
+
+if (message.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
+  message.delete()
+}
+
+// Delete Embed Message
+setTimeout(() => {
+  if (msg.deletable) msg.delete().catch(console.error)
+}, 1200000) // 1200000 = 20 Minutes
+```
+
+**8Ball Command**
+
+```javascript
+let answers = [
+  'As I see it, yes.',
+  'Ask again later.',
+  'Better not tell you now.',
+  'Cannot predict now.',
+  'Concentrate and ask again.',
+  `Don't count on it.`,
+  `It is certain.`,
+  `It is decidedly so.`,
+  `Most likely.`,
+  `My reply is no.`,
+  `My sources say no.`,
+  `Outlook not so good.`,
+  `Outlook good.`,
+  `Reply hazy, try again.`,
+  `Signs point to yes.`,
+  `Very doubtful.`,
+  `Without a doubt.`,
+  `Yes.`,
+  `Yes - definitely.`,
+  `You may rely on it.`,
+]
+const BallNumber = Math.floor(Math.random() * answers.length)
+message.reply({
+  content: answers[BallNumber],
+  allowedMentions: { users: [message.author.id] },
+})
+```
+
+**Leave Bot from Specific Guild**
+
+```javascript
+let msg = message.content.slice(process.env.PREFIX.length + commandName.length).trim()
+// msg = !command_name guild_name
+client.guilds.cache.each((guild) => {
+  if (guild.name === msg) {
+    client.guilds.cache
+      .get(guild.id)
+      .leave()
+      .catch((err) => {
+        console.log(`there was an error leaving the guild: \n ${err.message}`)
+      })
+  }
+})
+```
+
+**Send Message to Specific Guild Default Channel**
+
+```javascript
+const { Permissions } = require('discord.js')
+// msg = !command_name guild_name|message
+let msg = message.content
+  .slice(process.env.PREFIX.length + commandName.length)
+  .trim()
+  .split('|')
+let defaultChannel = 0
+client.guilds.cache.each(async (guild) => {
+  if (guild.name === msg[0].trim()) {
+    let user = await guild.members.fetch(guild.ownerId).then((owner) => {
+      return owner
+    })
+    guild.channels.cache.forEach((channel) => {
+      if (defaultChannel === 0 && channel.type === 'GUILD_TEXT') {
+        if (channel.permissionsFor(guild.me).has(Permissions.FLAGS.SEND_MESSAGES)) {
+          defaultChannel = 1
+          channel
+            .send(`${msg[1]} <@${user.id}>`)
+            .then(() => {
+              console.log(
+                `Bot send message to ${guild.name} ${user.user.username}#${user.user.discriminator}`
+              )
+            })
+            .catch(() => {
+              console.log(
+                `Bot can't send message to ${guild.name} ${user.user.username}#${user.user.discriminator}`
+              )
+            })
+        }
+      }
+    })
+  }
+})
+```
+
+**Send Message to All Guilds Default Channel**
+
+```javascript
+const { Permissions } = require('discord.js')
+// msg = !command_name message
+let msg = message.content
+  .slice(process.env.PREFIX.length + commandName.length)
+  .trim()
+  .split('|')
+client.guilds.cache.each((guild) => {
+  let defaultChannel = 0
+  guild.channels.cache.forEach((channel) => {
+    if (defaultChannel === 0) {
+      if (
+        channel.type === 'GUILD_TEXT' &&
+        channel.permissionsFor(guild.me).has(Permissions.FLAGS.SEND_MESSAGES)
+      ) {
+        defaultChannel = 1
+        channel
+          .send(`${msg[0]}`)
+          .then(() => {
+            console.log(`Bot send message to ${guild.name}`)
+          })
+          .catch(() => {
+            console.log(`Bot can't send message to ${guild.name}`)
+          })
+      }
+    }
+  })
+})
+```
+
+**Get Guilds**
+
+```javascript
+// msg = !command_name
+client.guilds.cache.each((guild) => {
+  console.log(`${guild.name} [${guild.memberCount} Users]\n`)
+})
+```
+
+**Get Users from Specific Guild**
+
+```javascript
+// msg = !command_name guild_name
+let msg = message.content.slice(process.env.PREFIX.length + commandName.length).trim()
+client.guilds.cache.each(async (guild) => {
+  if (guild.name === msg) {
+    console.log(`The ${guild.name} users : `)
+    const members = await guild.members.fetch()
+    await members.each((member) => {
+      console.log(`${member.user.username}#${member.user.discriminator}`)
+    })
+  }
+})
+```
+
+**Get Channels from Specific Guild**
+
+```javascript
+// msg = !command_name guild_name
+let msg = message.content.slice(process.env.PREFIX.length + commandName.length).trim()
+client.guilds.cache.each(async (guild) => {
+  if (guild.name === msg) {
+    console.log(`The ${guild.name} channels : `)
+    guild.channels.cache.each((channel) => {
+      console.log(`${channel.name} - ${channel.type}`)
+    })
+  }
+})
+console.log(channels)
+```
+
+**Get Last 100 Messages from Specific Guild**
+
+```javascript
+// msg = !command_name guild_name|channel_name
+let msg = message.content
+  .slice(process.env.PREFIX.length + commandName.length)
+  .trim()
+  .split('|')
+client.guilds.cache.each(async (guild) => {
+  if (guild.name === msg[0].trim()) {
+    console.log(`The ${msg[0].trim()} ${msg[1].trim()} channel messages :`)
+
+    guild.channels.cache.each(async (channel) => {
+      if (channel.name === msg[1].trim()) {
+        const messages = await channel.messages.fetch({ limit: 99 })
+
+        messages.forEach((msg) => {
+          console.log(`${msg.author.username}#${msg.author.discriminator} - ${msg.content}`)
+        })
+      }
+    })
+  }
+})
+```

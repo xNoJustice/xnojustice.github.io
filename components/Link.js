@@ -17,7 +17,15 @@ const CustomLink = ({ href, ...rest }) => {
     return <a href={href} {...rest} />
   }
 
-  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />
+  return (
+    <a
+      className="flex text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+      target="_blank"
+      rel="noopener noreferrer"
+      href={href}
+      {...rest}
+    />
+  )
 }
 
 export default CustomLink

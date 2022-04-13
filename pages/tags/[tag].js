@@ -30,10 +30,12 @@ export async function getStaticProps({ params }) {
   )
 
   // rss
-  const rss = generateRss(filteredPosts, `tags/${params.tag}/feed.xml`)
-  const rssPath = path.join(root, 'public', 'tags', params.tag)
-  fs.mkdirSync(rssPath, { recursive: true })
-  fs.writeFileSync(path.join(rssPath, 'feed.xml'), rss)
+  if (filteredPosts.length > 0) {
+    const rss = generateRss(filteredPosts, `tags/${params.tag}/feed.xml`)
+    const rssPath = path.join(root, 'public', 'tags', params.tag)
+    fs.mkdirSync(rssPath, { recursive: true })
+    fs.writeFileSync(path.join(rssPath, 'feed.xml'), rss)
+  }
 
   return { props: { posts: filteredPosts, tag: params.tag } }
 }
@@ -44,8 +46,8 @@ export default function Tag({ posts, tag }) {
   return (
     <>
       <TagSEO
-        title={`${tag} - ${siteMetadata.title}`}
-        description={`${tag} tags - ${siteMetadata.title}`}
+        title={`${tag} - ${siteMetadata.author}`}
+        description={`${tag} tags - ${siteMetadata.author}`}
       />
       <ListLayout posts={posts} title={title} />
     </>

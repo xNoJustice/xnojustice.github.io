@@ -10,11 +10,11 @@ const CommonSEO = ({ title, description, ogType }) => {
       <meta name="robots" content="follow, index" />
       <meta name="description" content={description} />
       <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
-      <link rel="canonical" href={`${siteMetadata.siteUrl}${router.asPath}`} />
       <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteMetadata.title} />
       <meta property="og:description" content={description} />
       <meta property="og:title" content={title} />
+      <link rel="canonical" href={`${siteMetadata.siteUrl}${router.asPath}`} />
     </Head>
   )
 }
@@ -40,7 +40,7 @@ export const TagSEO = ({ title, description }) => {
   )
 }
 
-export const BlogSEO = ({ authorDetails, title, summary, date, lastmod, url }) => {
+export const BlogSEO = ({ authorDetails, title, summary, date, lastmod, url, canonicalUrl }) => {
   const router = useRouter()
   const publishedAt = new Date(date).toISOString()
   const modifiedAt = new Date(lastmod || date).toISOString()
@@ -84,11 +84,10 @@ export const BlogSEO = ({ authorDetails, title, summary, date, lastmod, url }) =
 
   return (
     <>
-      <CommonSEO title={title} description={summary} ogType="article" />
+      <CommonSEO title={title} description={summary} ogType="article" canonicalUrl={canonicalUrl} />
       <Head>
         {date && <meta property="article:published_time" content={publishedAt} />}
         {lastmod && <meta property="article:modified_time" content={modifiedAt} />}
-        <link rel="canonical" href={`${siteMetadata.siteUrl}${router.asPath}`} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
